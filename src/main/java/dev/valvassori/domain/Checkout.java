@@ -40,6 +40,17 @@ public class Checkout {
     }
 
     // TODO: Implement getDiscount
+    public double getDiscount() {
+        if (voucher == null) {
+            return 0;
+        } else {
+            return voucher.calculateDiscountFor(getSubtotal());
+        }
+    }
+
+    public void addVoucher(String code) {
+        voucher = store.getVoucher(code);
+    }
 
     // TODO: Implement getTotal
 }

@@ -84,4 +84,21 @@ public class CheckoutTest {
 
         Assert.assertEquals(164.6, result, 0.00001);
     }
+
+    @Test
+    public void getDiscount_withoutVoucher_returnsZero() {
+        double result = subject.getDiscount();
+
+        Assert.assertEquals(0, result, 0.00001);
+    }
+
+    @Test
+    public void getDiscount_withVoucher_returnsItsDiscount() {
+        subject.addItem(1, 3);
+        subject.addVoucher("20off"); // 74.7 * 0.2 = 14.94
+
+        double result = subject.getDiscount();
+
+        Assert.assertEquals(14.94, result, 0.00001);
+    }
 }
