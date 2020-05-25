@@ -39,4 +39,49 @@ public class CheckoutTest {
 
         Assert.assertEquals(3, result);
     }
+
+    @Test
+    public void getSubtotal_withoutItems_returnZero() {
+        double result = subject.getSubtotal();
+
+        Assert.assertEquals(0, result, 0.00001);
+    }
+
+    @Test
+    public void getSubtotal_withOneItem_returnsItsPrice() {
+        subject.addItem(1, 1);
+
+        double result = subject.getSubtotal();
+
+        Assert.assertEquals(24.9, result, 0.00001);
+    }
+
+    @Test
+    public void getSubtotal_withItems_returnsItsPrice() {
+        subject.addItem(1, 1);
+        subject.addItem(2, 1);
+
+        double result = subject.getSubtotal();
+
+        Assert.assertEquals(69.85, result, 0.00001);
+    }
+
+    @Test
+    public void getSubtotal_withOneItemWithMoreUnits_returnsItsPrice() {
+        subject.addItem(1, 3);
+
+        double result = subject.getSubtotal();
+
+        Assert.assertEquals(74.7, result, 0.00001);
+    }
+
+    @Test
+    public void getSubtotal_withManyOfSameItem_returnsItsPrice() {
+        subject.addItem(1, 3);
+        subject.addItem(2, 2);
+
+        double result = subject.getSubtotal();
+
+        Assert.assertEquals(164.6, result, 0.00001);
+    }
 }

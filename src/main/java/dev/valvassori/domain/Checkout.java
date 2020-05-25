@@ -29,6 +29,15 @@ public class Checkout {
     }
 
     // TODO: Implement getSubtotal
+    public double getSubtotal() {
+        double subtotal = 0;
+
+        for (Product product : products.keySet()) {
+            subtotal += product.getPrice() * products.get(product);
+        }
+
+        return subtotal;
+    }
 
     // TODO: Implement getDiscount
 
