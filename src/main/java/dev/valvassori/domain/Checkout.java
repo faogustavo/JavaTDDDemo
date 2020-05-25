@@ -13,6 +13,10 @@ public class Checkout {
         this.store = store;
     }
 
+    public int getQuantityCount() {
+        return 0;
+    }
+
     // TODO: Implement getQuantityCount
 
     // TODO: Implement addProduct
