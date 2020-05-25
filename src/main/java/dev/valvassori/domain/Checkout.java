@@ -53,4 +53,7 @@ public class Checkout {
     }
 
     // TODO: Implement getTotal
+    public double getTotal() {
+        return getSubtotal() - getDiscount();
+    }
 }

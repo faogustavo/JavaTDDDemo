@@ -101,4 +101,23 @@ public class CheckoutTest {
 
         Assert.assertEquals(14.94, result, 0.00001);
     }
+
+    @Test
+    public void getTotal_withoutDiscount_returnsSubtotal() {
+        subject.addItem(1, 3);
+
+        double result = subject.getTotal();
+
+        Assert.assertEquals(74.7, result, 0.00001);
+    }
+
+    @Test
+    public void getTotal_withDiscount_returnsSubtotalWithDiscountApplied() {
+        subject.addItem(1, 3);
+        subject.addVoucher("20off"); // 74.7 - 14.94 = 59.76
+
+        double result = subject.getTotal();
+
+        Assert.assertEquals(59.76, result, 0.00001);
+    }
 }
