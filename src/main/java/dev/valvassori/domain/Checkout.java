@@ -13,13 +13,20 @@ public class Checkout {
         this.store = store;
     }
 
+    // TODO: Implement getQuantityCount
     public int getQuantityCount() {
-        return 0;
+        return products.values()
+                .stream()
+                .reduce(0, Integer::sum);
     }
 
-    // TODO: Implement getQuantityCount
-
     // TODO: Implement addProduct
+    public void addItem(int productId, int quantity) {
+        products.put(
+                store.getProduct(productId),
+                quantity
+        );
+    }
 
     // TODO: Implement getSubtotal
 

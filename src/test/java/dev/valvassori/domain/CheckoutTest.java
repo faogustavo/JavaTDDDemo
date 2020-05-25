@@ -20,4 +20,23 @@ public class CheckoutTest {
 
         Assert.assertEquals(0, result);
     }
+
+    @Test
+    public void getQuantityCount_withAddedItem_returnsItsQuantity() {
+        subject.addItem(1, 3);
+
+        int result = subject.getQuantityCount();
+
+        Assert.assertEquals(3, result);
+    }
+
+    @Test
+    public void getQuantityCount_withAddedDifferentItem_returnsItsQuantity() {
+        subject.addItem(1, 2);
+        subject.addItem(2, 1);
+
+        int result = subject.getQuantityCount();
+
+        Assert.assertEquals(3, result);
+    }
 }
