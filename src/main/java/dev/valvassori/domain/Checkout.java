@@ -22,6 +22,10 @@ public class Checkout {
 
     // TODO: Implement addProduct
     public void addItem(int productId, int quantity) {
+        // TODO: Validate negative quantity
+        // TODO: Validate null product (product not found in store)
+        // TODO: Validate add item twice
+        // TODO: Validate more items than available
         products.put(
                 store.getProduct(productId),
                 quantity
