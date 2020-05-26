@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.security.InvalidParameterException;
+
 public class CheckoutTest {
 
     private Checkout subject;
@@ -129,5 +131,35 @@ public class CheckoutTest {
         double result = subject.getTotal();
 
         Assert.assertEquals(0.0, result, 0.00001);
+    }
+
+    @Test
+    public void addItem_withRepeatedItem_returnsSumOfThem() {
+        subject.addItem(1, 1);
+        subject.addItem(1, 1);
+
+        int result = subject.getQuantityCount();
+
+        Assert.assertEquals(2, result);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void addItem_withZeroQuantity_throwsAnException() {
+        subject.addItem(1, 0);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void addItem_withNegativeQuantity_throwsAnException() {
+        subject.addItem(1, -1);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void addItem_withInvalidProductId_throwsAnException() {
+        subject.addItem(-1, 1);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void addItem_withMoreItemsThenAvailable_throwsAnException() {
+        subject.addItem(2, 5);
     }
 }

@@ -1,5 +1,6 @@
 package dev.valvassori.domain;
 
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,20 +17,35 @@ public class Checkout {
     // TODO: Implement getQuantityCount
     public int getQuantityCount() {
         return products.values()
-                .stream()
-                .reduce(0, Integer::sum);
+            .stream()
+            .reduce(0, Integer::sum);
     }
 
     // TODO: Implement addProduct
     public void addItem(int productId, int quantity) {
-        // TODO: Validate negative quantity
-        // TODO: Validate null product (product not found in store)
-        // TODO: Validate add item twice
-        // TODO: Validate more items than available
-        products.put(
-                store.getProduct(productId),
-                quantity
-        );
+        if (quantity <= 0) {
+            throw new InvalidParameterException("Quantity should be greater then zero");
+        }
+
+        Product product = store.getProduct(productId);
+        if (product == null) {
+            throw new InvalidParameterException(
+                String.format("Product with id %d was not found in the store", productId)
+            );
+        }
+
+        int newQuantity = products.getOrDefault(product, 0) + quantity;
+        if (newQuantity > product.getQuantity()) {
+            throw new IllegalStateException(
+                String.format(
+                    "The store only has %d of this item in stock. You requested %d.",
+                    product.getQuantity(),
+                    quantity
+                )
+            );
+        }
+
+        products.put(product, newQuantity);
     }
 
     // TODO: Implement getSubtotal
