@@ -54,6 +54,6 @@ public class Checkout {
 
     // TODO: Implement getTotal
     public double getTotal() {
-        return getSubtotal() - getDiscount();
+        return Math.max(getSubtotal() - getDiscount(), 0);
     }
 }

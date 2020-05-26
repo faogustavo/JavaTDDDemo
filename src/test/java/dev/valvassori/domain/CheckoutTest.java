@@ -120,4 +120,14 @@ public class CheckoutTest {
 
         Assert.assertEquals(59.76, result, 0.00001);
     }
+
+    @Test
+    public void getTotal_withDiscountGreaterThenSubtotal_returnsZero() {
+        subject.addItem(1, 1);
+        subject.addVoucher("30dol");
+
+        double result = subject.getTotal();
+
+        Assert.assertEquals(0.0, result, 0.00001);
+    }
 }
